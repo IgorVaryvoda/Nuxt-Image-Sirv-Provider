@@ -46,6 +46,7 @@ export const operationsGenerator = createOperationsGenerator({
         },
         format: {
             gif: 'gif',
+            jpeg: 'jpg',
             jpg: 'jpg',
             png: 'png',
             webp: 'webp',
