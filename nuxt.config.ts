@@ -8,7 +8,7 @@ export default defineNuxtConfig({
         name: 'sirv',
         provider: '~/providers/sirv',
         options: {
-          baseURL: 'https://cdn.earthroulette.com'
+          baseURL: 'https://demo.sirv.com'
         }
       }
     },

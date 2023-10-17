@@ -1,7 +1,6 @@
 import { joinURL } from 'ufo'
-import type { ProviderGetImage } from '~/types'
+import {ProviderGetImage} from "@nuxt/image";
 import { createOperationsGenerator } from '#image'
-
 export const operationsGenerator = createOperationsGenerator({
     keyMap: {
         width: 'w',
@@ -9,19 +8,20 @@ export const operationsGenerator = createOperationsGenerator({
         format: 'format',
         quality: 'q',
         crop: 'cw',
+        fit: 'scale.option'
     },
     valueMap: {
-        // fit: {
-        //     fill: 'scale',
-        //     inside: 'max',
-        //     outside: 'min',
-        //     cover: 'cover',
-        //     contain: 'fill',
-        //     clamp: 'clamp',
-        //     clip: 'clip',
-        //     facearea: 'facearea',
-        //     fillMax: 'fillmax'
-        // },
+        fit: {
+            fill: 'fill',
+            inside: 'max',
+            outside: 'min',
+            cover: 'cover',
+            contain: 'fit',
+            clamp: 'clamp',
+            clip: 'clip',
+            facearea: 'facearea',
+            fillMax: 'fillmax'
+        },
         format: {
             gif: 'gif',
             jpg: 'jpg',
