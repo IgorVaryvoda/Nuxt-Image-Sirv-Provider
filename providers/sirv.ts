@@ -117,6 +117,15 @@ export const operationsGenerator = createOperationsGenerator({
     },
     colorizeColor(value: string) {
       return deleteHash(value)
+    },
+    textColor(value: string) {
+      return deleteHash(value)
+    },
+    textoutlineColor(value: string) {
+      return deleteHash(value)
+    },
+    textBackgroundColor(value: string) {
+      return deleteHash(value)
     }
   },
   joinWith: '&',
