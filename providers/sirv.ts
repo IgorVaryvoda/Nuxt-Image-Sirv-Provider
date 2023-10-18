@@ -2,6 +2,22 @@ import { joinURL } from 'ufo'
 import { ProviderGetImage } from "@nuxt/image";
 import { createOperationsGenerator } from '#image'
 const deleteHash = (value: string) => value.startsWith('#') ? value.replace('#', '') : value
+const generateColorKeys = () => {
+  const keysNeedingHashDeletion = [
+    'canvasBorderColor',
+    'frameColor',
+    'frameRimColor',
+    'colorizeColor',
+    'colortoneColor',
+    'textColor',
+    'textoutlineColor',
+    'textBackgroundColor'
+  ];
+
+  return Object.fromEntries(
+    keysNeedingHashDeletion.map(key => [key, (value: string) => deleteHash(value)])
+  );
+};
 export const operationsGenerator = createOperationsGenerator({
   keyMap: {
     width: 'w',
@@ -53,7 +69,7 @@ export const operationsGenerator = createOperationsGenerator({
     textOutlineOpacity: 'text.outline.opacity',
     textOutlineBlur: 'text.outline.blur',
     textBackgroundColor: 'text.background.color',
-    textbackgroundOpacity: 'text.background.opacity',
+    textBackgroundOpacity: 'text.background.opacity',
     sharpen: 'sharpen',
     blur: 'blur',
     grayscale: 'grayscale',
@@ -106,27 +122,7 @@ export const operationsGenerator = createOperationsGenerator({
       jpeg: 'jpg',
       original: 'original',
     },
-    canvasBorderColor(value: string) {
-      return deleteHash(value)
-    },
-    frameColor(value: string) {
-      return deleteHash(value)
-    },
-    frameRimColor(value: string) {
-      return deleteHash(value)
-    },
-    colorizeColor(value: string) {
-      return deleteHash(value)
-    },
-    textColor(value: string) {
-      return deleteHash(value)
-    },
-    textoutlineColor(value: string) {
-      return deleteHash(value)
-    },
-    textBackgroundColor(value: string) {
-      return deleteHash(value)
-    }
+    ...generateColorKeys(),
   },
   joinWith: '&',
   formatter: (key: any, value: any) => `${key}=${value}`

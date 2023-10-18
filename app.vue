@@ -48,7 +48,7 @@
     <div class="mb-8">
       <h3 class="text-2xl mb-2">Text overlay</h3>
       <NuxtImg provider="sirv" src="look-big.jpg" height="500" placeholder class="shadow-lg" :modifiers="{
-        text: 'Hello there', textAlign: 'center', textPositionGravity: 'south', textSize: 60, textFontFamily: 'Arial', textColor: 'white'
+        text: 'Hello there', textAlign: 'center', textPositionGravity: 'south', textBackgroundColor: '#ffff', textSize: 60, textFontFamily: 'Arial', textColor: 'white'
       }" />
     </div>
     <div class="mb-8">
