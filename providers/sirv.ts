@@ -107,11 +107,9 @@ export const operationsGenerator = createOperationsGenerator({
   valueMap: {
     fit: {
       fill: 'ignore',
-      inside: 'noup',
-      outside: 'min',
-      cover: 'fill',
-      contain: 'ignore',
-      fillMax: 'fillmax'
+      outside: 'fill',
+      inside: 'fill',
+      noUpscaling: 'noup'
     },
     crop: {
       face: 'face',

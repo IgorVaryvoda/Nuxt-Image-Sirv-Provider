@@ -7,9 +7,9 @@ links:
     to: https://github.com/nuxt/image/blob/main/src/runtime/providers/sirv.ts
     size: xs
 ---
-Integration between [Sirv](https://sirv.com/) and the image module.
+Integration between [Sirv](https://sirv.com/) and Nuxt image.
 
-To use the Sirv provider, you need to set your Sirv account URL-endpoint as the base url like below.
+To use Sirv provider, you need to set up your Sirv URL as the baseURL in the Nuxt Image module configuration, like this:
 
 ```ts [nuxt.config.ts]
 export default defineNuxtConfig({
@@ -21,120 +21,189 @@ export default defineNuxtConfig({
 })
 ```
 
-> Get your alias from your [Sirv account details](https://my.sirv.com/#/account/settings) or set up a custom domain (instructions [here](https://sirv.com/help/articles/multiple-domains/)).
+> Get your alias from your [Sirv account details page](https://my.sirv.com/#/account/settings) or set up a custom domain ([instructions](https://sirv.com/help/articles/multiple-domains/)).
 
-## Sirv `fit` Parameters
-to be added
+## Sirv `fit` parameters
+By default, Sirv will scale the image, preserving its aspect ratio, to fit within the smallest dimension.
+Here's the map of standard values for the [fit](/usage/nuxt-img#fit) property and how they're going to be interpreted by Sirv:
+- `fill`: `ignore` 
+- `inside`: `fill`
+- `outside`: `fill`
+- `noUpscaling`: `noup`, this is the default option for Sirv image provider, so you don't need to specify it explicitly.
 
-## Sirv Modifiers
+## `format`
+if no format is specified, Sirv will deliver your images in the [optimal](https://sirv.com/help/articles/dynamic-imaging/#optimal) format by default.
+Alternatively, you can specify a custom format for the image like this:
 
-On top of the standard [Nuxt Image modifiers](/usage/nuxt-img#modifiers), a user can also leverage sirv-specific transformation parameters provided in the `modifier` prop.
+```html
+<NuxtImg
+    provider="sirv"
+    src="/example-image.jpg"
+    width="300"
+    format="webp"
+/>
+```
+## Sirv modifiers
 
-### `format`
-if not format is specified, Sirv will deliver your images in the optimal format by default.
-Alternatively, you can specify a custom format for the image like so:
+To use Sirv-specific transformations, add them in the  `modifier` prop.
+
+
 
 ### `profile`
 
 Use [Sirv profiles](https://sirv.com/help/profiles) to combine multiple transformation options into a single parameter.
-For example, combine this and that and blah blah and get this.
+For example, you can combine `canvas`, `crop` and `watermark` parameters into a single profile and use it like this:
 
-### `grayscale`
+```html
+<NuxtImg
+    provider="sirv"
+    src="/example-image.jpg"
+    width="300"
+    :modifiers="{profile: 'my-profile'}
+/>
+```
+### `canvas`
+Use the `canvas` modifier to add a canvas around your image. You can also set its width, height, color, and position.
 
-Turn your image to a grayscale version using the `grayscale` modifier.
+### `sharpen`
+Sharpen the image using the `sharpen` modifier.
 
 ```html
 <NuxtImg
   provider="sirv"
-  src="/default-image.jpg"
-  height="300"
-  :modifiers="{grayscale: true}"
+  src="/example-image.jpg"
+  width="300"
+  :modifiers="{sharpen: 50}"
 />
 ```
 
+### `frame`
 
-### `border`
-
-Add a border to your images using the `border` modifier. You can also set its width and color.
+Add a frame/border to your images using the `frame` modifier. You can also set its width and color.
 
 ```html
 <NuxtImg
   provider="sirv"
-  src="/default-image.jpg"
+  src="/example-image.jpg"
   width="300"
-  :modifiers="{border: ''}"
+  :modifiers="{
+    frameStyle: 'solid',
+    frameColor: '00000',
+    frameWidth: '2',
+    frameRimColor: '97A6B1',
+    frameRimWidth: '2'
+   }"
 />
 ```
 
 
 ### `rotate`
 
-Use the `rotate` modifier to rotate your image. Possible values are - 
+Use the `rotate` modifier to rotate your image. You can specify the number of degrees to rotate the image by.
 
 ```html
 <NuxtImg
   provider="sirv"
-  src="/default-image.jpg"
+  src="/example-image.jpg"
   :modifiers="{rotate: 90}"
 />
 ```
 
+### Color and light options 
+Sirv has various [color manipulation options]((https://sirv.com/help/articles/dynamic-imaging/color/)) like `grayscale`, `colorize`,`colortone`,`colorLevels`, as well as [light manipulation options](https://sirv.com/help/articles/dynamic-imaging/light/) like `lightness`,
+`hue`, `saturation`, `highlights`, `shadows`, `brightness`, `exposure`, `contrast`.
+
+Here's how to convert an image to grayscale:
+
+```html
+<NuxtImg
+  provider="sirv"
+  src="/example-image.jpg"
+  width="300"
+  :modifiers="{grayscale: true}"
+/>
+```
 
 
-## Watermarks and Text Overlay
+### Watermarks and text overlays
 Using Sirv's Nuxt Image integration, you can overlay images or text over other images for watermarking or creating a dynamic banner using custom text!
 
-### `watermark`
+#### `watermark`
 
-Overlay an image on top of another image (base image) using the `overlayImage` modifier. You can use this to create dynamic banners, watermarking, etc.
-
-```html
-<NuxtImg
-  provider="sirv"
-  src="/default-image.jpg"
-  :modifiers=""
-  />
-```
-Read more about watermarks [here](https://sirv.com/help/articles/dynamic-imaging/watermark/).
-### Overlay Text
-
-You can overlay text on an image and apply various transformations to it as per your needs.
+Add an image overlay over your existing image using the `watermark` modifier. Used mostly for watermarking, but can be useful for creating banners, OG images, and personalization. Here's an example of a single watermark:
 
 ```html
-<NuxtImg
-  provider="sirv"
-  src="/default-image.jpg"
-  :modifiers=""
+<NuxtImg provider="sirv" 
+ src="example-image.jpg" 
+ width="300" 
+ :modifiers="{
+    watermark: '/watermark-v1.png',
+    watermarkPosition: 'center',
+    watermarkWidth: '30%',
+  }" 
 />
 ```
+ You can also add multiple watermarks to your images like this:
+```html
+<NuxtImg provider="sirv" src="t-shirt-man.jpg" height="500" class="shadow-lg" crossorigin="anonymous" :modifiers="{
+  watermark: [
+    {
+      image: '/watermark-v1.png',
+      watermarkPosition: 'center',
+      watermarkWidth: '30%',
+    },
+    {
+      image: '/watermark-v1.png',
+      watermarkPosition: 'south',
+      watermarkWidth: '40%',
+    }
+  ]
+}" />
+```
+Find out more about Sirv watermarks [here](https://sirv.com/help/articles/dynamic-imaging/watermark/).
 
-Read more about Sirv's overlay transformation parameters [here]()
+#### Overlay Text
 
-## Image Enhancement Modifiers
-
-### `contrast`
-Enhance contrast of an image using the `effectContrast` modifier.
+You can add text overlays to your images and have full freedom over their positioning and looks.
 
 ```html
-<NuxtImg
-  provider="sirv"
-  src="/default-image.jpg"
-  height="300"
-  :modifiers="{effectContrast: true}"
+<NuxtImg provider="sirv" 
+  src="example-image.jpg" width="300"
+  :modifiers="{
+    text: 'Hello there',
+    textAlign: 'center',
+    textPositionGravity: 'south',
+    textBackgroundColor: '#ffff',
+    textSize: 60,
+    textFontFamily: 'Arial',
+    textColor: 'white',
+  }" 
 />
 ```
-
-### `Sharpen`
-Sharpen the input image using the `effectSharpen` modifier.
-
+Multiple text overlays can be added to an image like this:
 ```html
-<NuxtImg
-  provider="sirv"
-  src="/default-image.jpg"
-  height="300"
-  :modifiers="{effectSharpen: 10}"
+<NuxtImg provider="sirv" 
+ src="look-big.jpg" 
+ height="500" 
+ :modifiers="{
+    text: [
+      {
+        text: 'Hello there',
+        textAlign: 'center',
+        textPositionGravity: 'north',
+      },
+      {
+        text: 'goodbye',
+        textAlign: 'center',
+        textPositionGravity: 'south',
+      }
+    ]
+  }" 
 />
 ```
+More examples of text overlays can be found [here](https://sirv.com/help/articles/dynamic-imaging/text/).
+
+
 
 ## List of supported transformations
 Sirv's Nuxt Image integration uses intuitive names for each transformation. If you use a property that does not match any of the following supported options, it will be added in the URL as it is.
@@ -146,7 +215,7 @@ Sirv's Nuxt Image integration uses intuitive names for each transformation. If y
 | s                        | s                       | Resize the image by its biggest side                                                                  |
 | quality                  | q                       | JPEG image quality (percentage).                                                                      |
 | fit                      | scale.option            | Image scaling options.                                                                                |
-| profile                  | profile                 | Apply a Sirv [profile](https://sirv.com/help/articles/dynamic-imaging/profiles/)                     |
+| profile                  | profile                 | Apply a Sirv [profile](https://sirv.com/help/articles/dynamic-imaging/profiles/)                      |
 | format                   | format                  | Image format served (defaults to [optimal](https://sirv.com/help/articles/dynamic-imaging/#optimal)). |
 | webpFallback             | webp-fallback           | Image format for browsers without WebP support.                                                       |
 | subsampling              | subsampling             | Chroma subsampling to reduce JPEG file size.                                                          |
