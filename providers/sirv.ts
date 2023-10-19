@@ -127,10 +127,34 @@ export const operationsGenerator = createOperationsGenerator({
   joinWith: '&',
   formatter: (key: any, value: any) => `${key}=${value}`
 })
-
 export const getImage: ProviderGetImage = (src, { modifiers = {}, baseURL = '/' } = {}) => {
-  const operations = operationsGenerator(modifiers);
-  return {
-    url: joinURL(baseURL, src + (operations ? ('?' + operations) : ''))
-  };
+  let operations: string[] = [];
+
+  Object.keys(modifiers).forEach((modifierKey) => {
+    const modifierValue = modifiers[modifierKey];
+
+    if (Array.isArray(modifierValue)) {
+      modifierValue.forEach((item, index) => {
+        const itemOperations = operationsGenerator(item).split('&');
+
+        const cleanedItemOperations = itemOperations.map(op => {
+          if (op.startsWith('text.') || op.startsWith('watermark.')) {
+            const prefix = op.startsWith('text.') ? 'text' : 'watermark';
+            return op.replace(prefix + '.', op.startsWith(`${prefix}.text`) || op.startsWith(`${prefix}.image`) ? `${modifierKey}.${index}.${prefix}` : `${modifierKey}.${index}.`);
+          }
+          return `${modifierKey}.${index}.${op}`;
+        });
+        operations.push(...cleanedItemOperations);
+      });
+    } else {
+      const singleOperations = operationsGenerator({ [modifierKey]: modifierValue }).split('&');
+      operations.push(...singleOperations);
+    }
+  });
+
+  const finalOperations = operations.join('&');
+  const url = joinURL(baseURL, src + (finalOperations ? ('?' + finalOperations) : ''));
+
+  return { url };
+
 }
