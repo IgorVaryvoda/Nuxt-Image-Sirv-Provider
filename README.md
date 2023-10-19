@@ -136,94 +136,95 @@ Sharpen the input image using the `effectSharpen` modifier.
 />
 ```
 
-## List of supported transforms
+## List of supported transformations
 Sirv's Nuxt Image integration uses intuitive names for each transformation. If you use a property that does not match any of the following supported options, it will be added in the URL as it is.
 
-| Supported Parameter Name | Translates to Parameter | Description                                               |
-|--------------------------|-------------------------|-----------------------------------------------------------|
-| width                    | w                       | width of the image                                        |
-| height                   | h                       | height of the image                                       |
-| s                        | s                       | resize the image by its biggest side                      |
-| quality                  | q                       | quality of the image                                      |
-| fit                      | scale.option            | fit                                                       |
-| profile                  | profile                 | apply a predefined profile                                |
-| format                   | format                  | change image format                                       |
-| webpFallback             | webp-fallback           | WebP fallback for unsupported browsers                    |
-| subsampling              | subsampling             | What subsampling to use                                   |
-| gifCompression           | gif.lossy               | Enable GIF compression                                    |
-| crop                     | crop.type               | Type of crop, available values (trim, poi, facedetection) |
-| cropAr                   | crop.aspectratio        | Crop aspect ratio                                         |
-| cw                       | cw                      | crop width                                                |
-| ch                       | ch                      | Crop height                                               |
-| cx                       | cx                      | Crop x                                                    |
-| cy                       | cy                      | Crop Y                                                    |
-| cropPaddingX             | crop.pad.x              | Crop padding                                              |
-| cropPaddingY             | crop.pad.y              |                                                           |
-| canvasHeight             | canvas.height           |                                                           |
-| canvasWidth              | canvas.width            |                                                           |
-| canvasAr                 | canvas.aspectratio      |                                                           |
-| canvasPosition           | canvas.position         |                                                           |
-| canvasBorderWidth        | canvas.border.width     |                                                           |
-| canvasBorderHeight       | canvas.border.height    |                                                           |
-| canvasBorderColor        | canvas.border.color     |                                                           |
-| canvasBorderOpacity      | canvas.border.opacity   |                                                           |
-| watermark                | watermark               |                                                           |
-| watermarkPosition        | watermark.position      |                                                           |
-| watermarkWidth           | watermark.scale.width   |                                                           |
-| watermarkHeight          | watermark.scale.height  |                                                           |
-| text                     | text                    |                                                           |
-| textBase64               | text.text64             |                                                           |
-| textSize                 | text.size               |                                                           |
-| textAlign                | text.align              |                                                           |
-| textPosition             | text.position           |                                                           |
-| textPositionX            | text.position.x         |                                                           |
-| textPositionY            | text.position.y         |                                                           |
-| textPositionGravity      | text.position.gravity   |                                                           |
-| textFontSize             | text.font.size          |                                                           |
-| textFontStyle            | text.font.style         |                                                           |
-| textFontFamily           | text.font.family        |                                                           |
-| textFontWeight           | text.font.weight        |                                                           |
-| textColor                | text.color              |                                                           |
-| textOpacity              | text.opacity            |                                                           |
-| textOutlineWidth         | text.outline.width      |                                                           |
-| textoutlineColor         | text.outline.color      |                                                           |
-| textOutlineOpacity       | text.outline.opacity    |                                                           |
-| textOutlineBlur          | text.outline.blur       |                                                           |
-| textBackgroundColor      | text.background.color   |                                                           |
-| textBackgroundOpacity    | text.background.opacity |                                                           |
-| sharpen                  | sharpen                 |                                                           |
-| blur                     | blur                    |                                                           |
-| grayscale                | grayscale               |                                                           |
-| colorize                 | colorize                |                                                           |
-| colorizeColor            | colorize.color          |                                                           |
-| colorizeOpacity          | colorize.opacity        |                                                           |
-| colortone                | colortone               |                                                           |
-| colortoneColor           | colortone.color         |                                                           |
-| colortoneLevel           | colortone.level         |                                                           |
-| colortoneMode            | colortone.mode          |                                                           |
-| vignette                 | vigette.value           |                                                           |
-| vignetteColor            | vigette.color           |                                                           |
-| lightness                | lightness               |                                                           |
-| colorlevelBlack          | colorlevel.black        |                                                           |
-| colorlevelWhite          | colorlevel.white        |                                                           |
-| histogram                | histogram               |                                                           |
-| hue                      | hue                     |                                                           |
-| saturation               | saturation              |                                                           |
-| highlights               | highlights              |                                                           |
-| shadows                  | shadows                 |                                                           |
-| brightness               | brightness              |                                                           |
-| exposure                 | exposure                |                                                           |
-| contrast                 | contrast                |                                                           |
-| rotate                   | rotate                  |                                                           |
-| flip                     | flip                    |                                                           |
-| flop                     | flop                    |                                                           |
-| opacity                  | opacity                 |                                                           |
-| frameStyle               | frame.style             |                                                           |
-| frameColor               | frame.color             |                                                           |
-| frameWidth               | frame.width             |                                                           |
-| frameRimColor            | frame.rim.color         |                                                           |
-| frameRimWidth            | frame.rim.width         |                                                           |
-| pdfPage                  | page                    |                                                           |
+| Supported Parameter Name | Translates to Parameter | Description                                                                       |
+|--------------------------|-------------------------|-----------------------------------------------------------------------------------|
+| width                    | w                       | Width of image.                                                                   |
+| height                   | h                       | Height of image.                                                                  |
+| s                        | s                       | Resize the image by its biggest side                                              |
+| quality                  | q                       | JPEG image quality (percentage).                                                  |
+| fit                      | scale.option            | Image scaling options.                                                            |
+| profile                  | profile                 | Apply a  Sirv [profile](https://sirv.com/help/articles/dynamic-imaging/profiles/) |
+| format                   | format                  | Image format served (about WebP, about optimal).                                  |
+| webpFallback             | webp-fallback           | Image format for browsers without WebP support.                                   |
+| subsampling              | subsampling             | Chroma subsampling to reduce JPEG file size.                                      |
+| gifCompression           | gif.lossy               | Apply lossy compression, to reduce GIF file size.                                 |
+| crop                     | crop.type               | Automatically crop to edge of image contents; point of interest; or face.         |
+| cropAr                   | crop.aspectratio        | Aspect ratio of the crop                                                          |
+| cw                       | cw                      | Crop the image to a specific width.                                               | 
+| ch                       | ch                      | Crop the image to a specific height.                                              |
+| cx                       | cx                      | Position to start image crop (from top).                                          |
+| cy                       | cy                      | Position to start image crop (from left).                                         |
+| cropPaddingX             | crop.pad.x              | Add padding to left/right of crop area                                            |
+| cropPaddingY             | crop.pad.y              | Add padding to top/bottom of crop area.                                           |
+| canvasHeight             | canvas.height           | Create a canvas around the image (height).                                        |
+| canvasWidth              | canvas.width            | Create a canvas around the image (width).                                         |
+| canvasAr                 | canvas.aspectratio      | Aspect ratio of the canvas from 1-99 e.g. 16:9                                    |
+| canvasPosition           | canvas.position         | Position of the canvas behind the image.                                          |
+| canvasBorderWidth        | canvas.border.width     | Adds additional width left and right of the canvas.                               |
+| canvasBorderHeight       | canvas.border.height    | Adds additional height above and below the canvas.                                |
+| canvasBorderColor        | canvas.border.color     | Color of the canvas border e.g. E0AA80 or red.                                    |
+| canvasBorderOpacity      | canvas.border.opacity   | Opacity of the canvas border.                                                     |
+| watermark                | watermark               | Filepath of the image to be overlayed.                                            |
+| watermarkPosition        | watermark.position      | Position of the watermark on the image.                                           |
+| watermarkWidth           | watermark.scale.width   | Width of watermark.                                                               |
+| watermarkHeight          | watermark.scale.height  | Height of watermark.                                                              |
+| text                     | text                    | Display text on your image.                                                       |
+| textBase64               | text.text64             | Alternative to text parameter, with Base64 encoding                               |
+| textSize                 | text.size               | Width of text area in relation to image.                                          |
+| textAlign                | text.align              | Align the multiline text.                                                         |
+| textPosition             | text.position           | Location of the text on the image.                                                |
+| textPositionX            | text.position.x         | Location of the text (from left).                                                 |
+| textPositionY            | text.position.y         | Location of the text (from top).                                                  |
+| textPositionGravity      | text.position.gravity   | Master location of the text on the image.                                         |
+| textFontSize             | text.font.size          | Fix the size of the text in px.                                                   |
+| textFontStyle            | text.font.style         | Style of the text.                                                                |
+| textFontFamily           | text.font.family        | Choose a font e.g. "Open Sans".                                                   |
+| textFontWeight           | text.font.weight        | Choose font weight (light, normal, semi-bold, bold, extra-bold).                  |
+| textColor                | text.color              | Text color e.g. E0AA80 or E0AA8020.                                               |
+| textOpacity              | text.opacity            | Text opacity.                                                                     |
+| textOutlineWidth         | text.outline.width      | Add an outline around the text.                                                   |
+| textoutlineColor         | text.outline.color      | Color of the text outline.                                                        |
+| textOutlineOpacity       | text.outline.opacity    | Opacity of the text outline.                                                      |
+| textOutlineBlur          | text.outline.blur       | Blur the edge of the text outline.                                                |
+| textBackgroundColor      | text.background.color   | Background color e.g. E0AA80 or E0AA8020.                                         |
+| textBackgroundOpacity    | text.background.opacity | Background opacity.                                                               |
+| sharpen                  | sharpen                 | Sharpen the image.                                                                |
+| blur                     | blur                    | Blur the image.                                                                   |
+| grayscale                | grayscale               | Make the image black & white.                                                     |
+| colorize                 | colorize                | Overlay a color on the image.                                                     |
+| colorizeColor            | colorize.color          | The color of the colorize option.                                                 |
+| colorizeOpacity          | colorize.opacity        | Opacity of the color overlay.                                                     |
+| colortone                | colortone               | Change the color tone of the image.                                               | 
+| colortoneColor           | colortone.color         | Apply a color tone to an image.                                                   |
+| colortoneLevel           | colortone.level         | Set the level of blending with the original image.                                |
+| colortoneMode            | colortone.mode          | Apply the color tone to the entire image or shadows/highlights only.              |
+| vignette                 | vigette.value           | Adjust the depth of the vignette.                                                 |
+| vignetteColor            | vigette.color           | Add a vignette (dark edges) around the image.                                     |
+| lightness                | lightness               | Change the lightness of the image.                                                |
+| colorlevelBlack          | colorlevel.black        | Adjust black level of image.                                                      |
+| colorlevelWhite          | colorlevel.white        | Adjust white level of image.                                                      |
+| histogram                | histogram               | Display a histogram of RGB levels.                                                |
+| hue                      | hue                     | Change the hue of the image.                                                      |
+| saturation               | saturation              | Change the saturation of the image.                                               |
+| highlights               | highlights              | Change the highlights of the image.                                               | 
+| shadows                  | shadows                 | Change the shadows of the image.                                                  |
+| brightness               | brightness              | Change the brightness of the image.                                               |
+| exposure                 | exposure                | Change the exposure of the image.                                                 | 
+| contrast                 | contrast                | Change the contrast of the image.                                                 |
+| rotate                   | rotate                  | Number of degrees to rotate the image.                                            |
+| flip                     | flip                    | Flip image vertically (mirror).                                                   |
+| flop                     | flop                    | Flip image horizontally (mirror).                                                 |
+| opacity                  | opacity                 | Opacity of PNG images.                                                            |
+| frameStyle               | frame.style             | Add a frame around the image.                                                     |
+| frameColor               | frame.color             | Frame color e.g. E0AA80 or E0AA8020.                                              |
+| frameWidth               | frame.width             | Frame width.                                                                      |
+| frameRimColor            | frame.rim.color         | Frame rim color e.g. E0AA80 or E0AA8020.                                          |
+| frameRimWidth            | frame.rim.width         | Frame rim width.                                                                  |
+| pdfPage                  | page                    | Page number of PDF when converted to image.                                       |
+
 
 > Learn more about [Sirv's Image transformations](https://sirv.com/help/article/dynamic-imaging) from the official documentation.
 This is a demo of how to use [Nuxt 3 Image](https://image.nuxtjs.org) with [Sirv](https://sirv.com) as the image provider.
