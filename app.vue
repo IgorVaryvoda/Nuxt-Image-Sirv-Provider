@@ -88,7 +88,7 @@
       }" />
     </div>
     <div class="mb-8">
-      <h3 class="text-2xl mb-2">Watermark overlay</h3>
+      <h3 class="text-2xl mb-2">Multiple Watermark overlays</h3>
       <NuxtImg provider="sirv" src="t-shirt-man.jpg" height="500" class="shadow-lg" crossorigin="anonymous" :modifiers="{
         watermark: [
           {
