@@ -296,4 +296,4 @@ Sirv's Nuxt Image integration uses intuitive names for each transformation. If y
 
 
 > Learn more about [Sirv's Image transformations](https://sirv.com/help/article/dynamic-imaging) from the official documentation.
-This is a demo of how to use [Nuxt 3 Image](https://image.nuxtjs.org) with [Sirv](https://sirv.com) as the image provider.
+
