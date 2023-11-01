@@ -1,6 +1,7 @@
 <template>
   <div class="p-6 min-h-screen flex flex-col justify-center items-center">
     <h2 class="text-3xl mb-6">Sirv Nuxt Image provider</h2>
+
     <div class="mb-8">
       <h3 class="text-2xl mb-2">JPG to PNG conversion</h3>
       <NuxtImg provider="sirv" src="/harris-large.jpg" width="500" format="png" class="shadow-lg"
@@ -28,7 +29,7 @@
 
     <div class="mb-8">
       <h3 class="text-2xl mb-2">500 width, cover fit</h3>
-      <NuxtImg provider="sirv" src="look-big.jpg" width="500" fit="cover" class="shadow-lg" crossorigin="anonymous" />
+      <NuxtImg provider="sirv" src="look-big.jpg" width="500" class="shadow-lg" crossorigin="anonymous" />
     </div>
     <div class="mb-8">
       <h3 class="text-2xl mb-2">Face detection crop</h3>
@@ -63,23 +64,6 @@
       }" />
     </div>
     <div class="mb-8">
-      <h3 class="text-2xl mb-2">Multiple Text overlays</h3>
-      <NuxtImg provider="sirv" src="look-big.jpg" height="500" class="shadow-lg" crossorigin="anonymous" :modifiers="{
-        text: [
-          {
-            text: 'Hello there',
-            textAlign: 'center',
-            textPositionGravity: 'north',
-          },
-          {
-            text: 'goodbye',
-            textAlign: 'center',
-            textPositionGravity: 'south',
-          }
-        ]
-      }" />
-    </div>
-    <div class="mb-8">
       <h3 class="text-2xl mb-2">Watermark overlay</h3>
       <NuxtImg provider="sirv" src="t-shirt-man.jpg" height="500" class="shadow-lg" crossorigin="anonymous" :modifiers="{
         watermark: '/watermark-v1.png',
@@ -87,23 +71,9 @@
         watermarkWidth: '30%',
       }" />
     </div>
-    <div class="mb-8">
-      <h3 class="text-2xl mb-2">Multiple Watermark overlays</h3>
-      <NuxtImg provider="sirv" src="t-shirt-man.jpg" height="500" class="shadow-lg" crossorigin="anonymous" :modifiers="{
-        watermark: [
-          {
-            image: '/watermark-v1.png',
-            watermarkPosition: 'center',
-            watermarkWidth: '30%',
-          },
-          {
-            image: '/watermark-v1.png',
-            watermarkPosition: 'south',
-            watermarkWidth: '40%',
-          }
-        ]
-      }" />
-    </div>
   </div>
 </template>
 
+<script setup
+        lang="ts">
+</script>

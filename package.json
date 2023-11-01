@@ -11,12 +11,12 @@
   },
   "devDependencies": {
     "@nuxt/devtools": "latest",
-    "@nuxtjs/tailwindcss": "^6.8.0",
-    "nuxt": "^3.7.4",
-    "vue": "^3.3.4",
+    "@nuxtjs/tailwindcss": "^6.8.1",
+    "nuxt": "^3.8.0",
+    "vue": "^3.3.7",
     "vue-router": "^4.2.5"
   },
   "dependencies": {
-    "@nuxt/image": "1.0.0-rc.3"
+    "@nuxt/image": "npm:@nuxt/image-edge@latest"
   }
 }
